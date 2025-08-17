@@ -3,11 +3,11 @@ import type { ISidebarItem } from "@/types/index.types";
 
 export const userSidebarItems:ISidebarItem[] = [
   {
-    title: "Bookings",
+    title: "Booking",
     items: [
       {
-        title: "Analytics",
-        url: "/user/bookings",
+        title: "Booking",
+        url: "/user/booking",
         component: BookingPage
       },
     ],

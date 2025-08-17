@@ -1,6 +1,5 @@
 import { AddTourPage } from "@/pages/Admin/AddTour/AddTourPage";
 import { AnalyticsPage } from "@/pages/Admin/Analytics/AnalyticsPage";
-import { BookingPage } from "@/pages/User/Booking/BookingPage";
 import type { ISidebarItem } from "@/types/index.types";
 
 export const adminSidebarItems:ISidebarItem[] = [
