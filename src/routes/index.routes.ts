@@ -7,7 +7,9 @@ import LoginPage from "@/pages/Login/LoginPage";
 import RegisterPage from "@/pages/Register/RegisterPage";
 import { BookingPage } from "@/pages/User/Booking/BookingPage";
 import { VerifyPage } from "@/pages/Verify/VerifyPage";
+import { generateRoutes } from "@/utils/generateRoutes";
 import { createBrowserRouter } from "react-router";
+import { adminSidebarItems } from "./adminSidebarItems";
 
 export const router = createBrowserRouter([
   {
@@ -22,17 +24,8 @@ export const router = createBrowserRouter([
   },
   {
     path: "/admin",
-  Component: DashboardLayout,
-    children: [
-      {
-        path: "analytics",
-        Component: AnalyticsPage,
-      },
-      {
-        path: "add-tour",
-        Component: AddTourPage
-      }
-    ],
+    Component: DashboardLayout,
+    children: [...generateRoutes(adminSidebarItems)],
   },
   {
     path: "/user",
