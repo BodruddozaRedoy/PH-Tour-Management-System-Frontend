@@ -52,10 +52,16 @@ export function LoginForm({
       const res = await loginForm(userInfo).unwrap()
       console.log(res)
       toast.success("Logged in successful")
+      navigate("/")
     } catch (error: any) {
-      if (error.status === 401) {
+      if (error.data.message === "Password does not match") {
+        
+      }else if(error.data.message === "User is not verified"){
         toast.error("Your account is not verified. Please verify your account")
         navigate("/verify", { state: data.email })
+      }
+      else{
+        toast.error("Something went wrong")
       }
       console.log(error)
     }

@@ -40,6 +40,7 @@ export const VerifyPage = () => {
     const location = useLocation()
     const navigate = useNavigate()
     const [codeSent, setCodeSent] = useState(false)
+    const [timer, setTimer] = useState(0)
     const [email] = useState(location.state)
     const [sendOtp] = useSendOtpMutation()
     const [verifyOtp] = useVerifyOtpMutation()
@@ -65,8 +66,11 @@ export const VerifyPage = () => {
             console.log(payload)
             const res = await verifyOtp(payload).unwrap()
             console.log(res)
-        } catch (error) {
+            toast.success("Otp Verified")
+            navigate("/")
+        } catch (error:any) {
             console.log(error)
+            toast.error(error.data.message)
         }
     }
 
@@ -76,13 +80,25 @@ export const VerifyPage = () => {
             const res = await sendOtp({ email }).unwrap()
             if (res.success) {
                 toast.success("Otp sent to your email", { id: toastId })
+                setTimer(10)
+                setCodeSent(true)
             }
-            setCodeSent(true)
             console.log(res)
         } catch (error) {
             console.log(error)
         }
     }
+
+    useEffect(() => {
+
+        if (email && codeSent) {
+            const timerID = setTimeout(() => {
+                setTimer(prev => prev > 0 ? prev - 1 : 0)
+                console.log("Tick")
+            }, 1000);
+            return () => clearInterval(timerID)
+        }
+    }, [email, codeSent, timer])
 
     return (
         <div className="flex items-center justify-center w-screen h-screen">
@@ -93,7 +109,7 @@ export const VerifyPage = () => {
                         <p>{email}</p>
                     </CardDescription>
                     <CardAction>
-                        <Button onClick={handleGetCode} variant="link">{codeSent ? "Resend" : "Get Code"}</Button>
+                        <Button disabled={timer !== 0} onClick={handleGetCode} variant="link">{codeSent ? `Resend (${timer})` : "Get Code"}</Button>
                     </CardAction>
                 </CardHeader>
                 <CardContent className="">
