@@ -17,6 +17,7 @@ import { useLoginMutation, useRegisterMutation } from "@/redux/features/auth/aut
 import { toast } from "sonner"
 import PasswordField from "@/pages/Register/components/PasswordField"
 import { Link, useNavigate } from "react-router"
+import { config } from "@/config"
 
 
 const loginSchema = z.object({
@@ -112,6 +113,7 @@ export function LoginForm({
               )}
             />
             <Button type="submit" className="w-full">Submit</Button>
+            <Button type="button" onClick={() => window.open(`${config.baseUrl}/auth/google`)}>Google</Button>
           </form>
         </Form>
       </div>
