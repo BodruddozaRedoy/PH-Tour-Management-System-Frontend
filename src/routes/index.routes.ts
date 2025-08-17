@@ -1,7 +1,11 @@
 import App from "@/App";
+import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import About from "@/pages/About";
+import { AddTourPage } from "@/pages/Admin/AddTour/AddTourPage";
+import { AnalyticsPage } from "@/pages/Admin/Analytics/AnalyticsPage";
 import LoginPage from "@/pages/Login/LoginPage";
 import RegisterPage from "@/pages/Register/RegisterPage";
+import { BookingPage } from "@/pages/User/Booking/BookingPage";
 import { VerifyPage } from "@/pages/Verify/VerifyPage";
 import { createBrowserRouter } from "react-router";
 
@@ -17,15 +21,39 @@ export const router = createBrowserRouter([
     ],
   },
   {
+    path: "/admin",
+  Component: DashboardLayout,
+    children: [
+      {
+        path: "analytics",
+        Component: AnalyticsPage,
+      },
+      {
+        path: "add-tour",
+        Component: AddTourPage
+      }
+    ],
+  },
+  {
+    path: "/user",
+    Component: DashboardLayout,
+    children: [
+      {
+        path: "booking",
+        Component: BookingPage,
+      },
+    ],
+  },
+  {
     path: "/login",
-    Component: LoginPage
+    Component: LoginPage,
   },
   {
     path: "/register",
-    Component: RegisterPage
+    Component: RegisterPage,
   },
   {
     path: "/verify",
-    Component: VerifyPage
+    Component: VerifyPage,
   },
 ]);
