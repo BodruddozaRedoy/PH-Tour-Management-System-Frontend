@@ -33,6 +33,8 @@ export default function Navbar() {
   const { data } = useUserInfoQuery(undefined)
   const dispatch = useAppDispatch()
 
+  console.log("User", data?.data)
+
   const handleLogout = async () => {
     try {
       const res = await logout(undefined).unwrap()
