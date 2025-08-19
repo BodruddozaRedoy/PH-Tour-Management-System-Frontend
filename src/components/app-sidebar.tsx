@@ -21,15 +21,15 @@ import { useUserInfoQuery } from "@/redux/features/auth/auth.api"
 
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const {data:userData} = useUserInfoQuery(undefined)
+  const { data: userData } = useUserInfoQuery(undefined)
   const data = {
-  navMain: getSidebarItems(userData?.data?.role)
-}
-console.log(userData)
+    navMain: getSidebarItems(userData?.data?.role)
+  }
+  console.log(userData)
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        <Logo />
+        <Link to={"/"}><Logo /></Link>
       </SidebarHeader>
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
